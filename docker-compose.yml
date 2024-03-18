@@ -13,6 +13,15 @@ services:
       - postgres:/var/lib/postgresql/data
     ports:
       - '5432:5432'         # 4
+  
+  graphql:
+    build: ./backend
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@host.docker.internal:5432/hackernews-db
+    ports:
+      - '3000:3000'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 volumes:
   postgres:
